@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, TrendingUp, CheckCircle2, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Project } from '../types';
 
 interface ProjectModalProps {
@@ -21,22 +22,61 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         className="w-full max-w-4xl max-h-[90vh] bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-200 flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="px-6 sm:px-8 py-4 border-b border-gray-100 flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-mono font-bold text-[#5271ff] bg-[#5271ff]/10 px-2.5 py-1 rounded-full uppercase">
-              Case Study #{project.number}
-            </span>
-            <span className="text-sm font-semibold text-gray-500">
-              {project.category}
-            </span>
+        {/* ==========================================
+            Gradient Header
+           ========================================== */}
+        <div className="relative px-6 sm:px-8 py-5 shrink-0 overflow-hidden">
+          {/* Base gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#5271ff] via-[#7a4bff] to-[#ff3131]" />
+
+          {/* Deep overlay for depth */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+
+          {/* Grid texture */}
+          <div
+            className="absolute inset-0 opacity-[0.08] pointer-events-none"
+            style={{
+              backgroundImage:
+                'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
+              backgroundSize: '32px 32px',
+            }}
+          />
+
+          {/* Animated ambient glows */}
+          <motion.div
+            animate={{ x: [0, 30, 0], y: [0, -20, 0], scale: [1, 1.15, 1] }}
+            transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
+            className="absolute -top-16 -right-16 w-[200px] h-[200px] bg-white/25 blur-[80px] rounded-full pointer-events-none"
+          />
+          <motion.div
+            animate={{ x: [0, -20, 0], y: [0, 15, 0], scale: [1, 1.2, 1] }}
+            transition={{ repeat: Infinity, duration: 12, ease: 'easeInOut' }}
+            className="absolute -bottom-16 -left-16 w-[200px] h-[200px] bg-[#0C0C0D]/30 blur-[80px] rounded-full pointer-events-none"
+          />
+
+          {/* Top and bottom hairline accents */}
+          <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+          <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+          {/* Header content */}
+          <div className="relative z-10 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="text-[10px] font-mono font-bold text-white bg-white/15 backdrop-blur-md border border-white/25 px-2.5 py-1 rounded-full uppercase tracking-[0.14em]">
+                Case Study #{project.number}
+              </span>
+              <span className="text-[12px] font-medium text-white/85 tracking-tight">
+                {project.category}
+              </span>
+            </div>
+
+            <button
+              onClick={onClose}
+              className="shrink-0 w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/25 text-white flex items-center justify-center cursor-pointer transition-all duration-200"
+              aria-label="Close"
+            >
+              <X size={16} />
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 rounded-full hover:bg-gray-100 text-gray-500 hover:text-black flex items-center justify-center cursor-pointer transition-colors"
-          >
-            <X size={18} />
-          </button>
         </div>
 
         {/* Scrollable Content */}

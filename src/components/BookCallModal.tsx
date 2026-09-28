@@ -85,44 +85,55 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
           onClick={(e) => e.stopPropagation()}
         >
           {/* ==========================================
-              Header
+              Gradient Header
              ========================================== */}
-          <div className="relative bg-[#0C0C0D] text-white p-6 sm:p-8 overflow-hidden">
+          <div className="relative px-6 sm:px-8 py-5 sm:py-6 overflow-hidden">
+            {/* Base gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#5271ff] via-[#7a4bff] to-[#ff3131]" />
+
+            {/* Deep overlay for depth */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+
             {/* Grid texture */}
             <div
-              className="absolute inset-0 opacity-[0.05] pointer-events-none"
+              className="absolute inset-0 opacity-[0.08] pointer-events-none"
               style={{
                 backgroundImage:
                   'linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
+                backgroundSize: '32px 32px',
               }}
             />
-            {/* Animated brand glows */}
-            <motion.div
-              animate={{ x: [0, 40, 0], y: [0, -30, 0], scale: [1, 1.15, 1] }}
-              transition={{ repeat: Infinity, duration: 12, ease: 'easeInOut' }}
-              className="absolute -top-24 -right-24 w-[320px] h-[320px] bg-[#5271ff] blur-[100px] rounded-full opacity-[0.28] pointer-events-none"
-            />
-            <motion.div
-              animate={{ x: [0, -30, 0], y: [0, 30, 0], scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 14, ease: 'easeInOut' }}
-              className="absolute -bottom-24 -left-24 w-[280px] h-[280px] bg-[#ff3131] blur-[100px] rounded-full opacity-[0.22] pointer-events-none"
-            />
-            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
 
+            {/* Animated ambient glows */}
+            <motion.div
+              animate={{ x: [0, 30, 0], y: [0, -20, 0], scale: [1, 1.15, 1] }}
+              transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
+              className="absolute -top-16 -right-16 w-[240px] h-[240px] bg-white/25 blur-[80px] rounded-full pointer-events-none"
+            />
+            <motion.div
+              animate={{ x: [0, -20, 0], y: [0, 15, 0], scale: [1, 1.2, 1] }}
+              transition={{ repeat: Infinity, duration: 12, ease: 'easeInOut' }}
+              className="absolute -bottom-16 -left-16 w-[240px] h-[240px] bg-[#0C0C0D]/30 blur-[80px] rounded-full pointer-events-none"
+            />
+
+            {/* Top and bottom hairline accents */}
+            <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+            <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+            {/* Content */}
             <div className="relative z-10 flex items-start justify-between gap-4">
               <div className="flex items-center gap-4">
                 <img
                   src="https://pub-3e8b7c985b25437fa65904241981be21.r2.dev/TP-version.png"
                   alt="Genesis"
-                  className="h-9 w-auto object-contain"
+  className="h-9 w-auto object-contain brightness-0 invert"
                 />
-                <div className="hidden sm:block h-8 w-px bg-white/15" />
+                <div className="hidden sm:block h-8 w-px bg-white/25" />
                 <div className="hidden sm:block">
                   <h3 className="font-semibold text-[15px] text-white tracking-tight leading-tight">
                     Book a Conversation
                   </h3>
-                  <p className="text-[11px] text-white/50 tracking-tight mt-0.5">
+                  <p className="text-[11px] text-white/70 tracking-tight mt-0.5">
                     Senior-led discovery · No obligation
                   </p>
                 </div>
@@ -130,7 +141,7 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
 
               <button
                 onClick={onClose}
-                className="shrink-0 w-9 h-9 rounded-full bg-white/5 hover:bg-white/15 border border-white/10 text-white/70 hover:text-white flex items-center justify-center transition-all cursor-pointer"
+                className="shrink-0 w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/25 text-white flex items-center justify-center transition-all cursor-pointer"
                 aria-label="Close"
               >
                 <X size={16} />
