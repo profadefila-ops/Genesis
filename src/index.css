@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+  --color-brand-blue: #5271ff;
+  --color-brand-red: #ff3131;
+}
+
+:root {
+  font-family: var(--font-sans);
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #FFFFFF;
+  color: #0C0C0D;
+}
+
+/* =========================================
+   GLOBAL H1 SIZING (Overrides Tailwind)
+   ========================================= */
+h1, .h1-style {
+  font-size: 1.75rem !important;   /* 28px */
+  line-height: 1.15 !important;
+  letter-spacing: -0.025em !important;
+}
+
+@media (min-width: 640px) {
+  h1, .h1-style { font-size: 2rem !important; }      /* 32px */
+}
+@media (min-width: 768px) {
+  h1, .h1-style { font-size: 2.25rem !important; }   /* 36px */
+}
+@media (min-width: 1024px) {
+  h1, .h1-style { font-size: 2.5rem !important; }    /* 40px */
+}
+@media (min-width: 1280px) {
+  h1, .h1-style { font-size: 2.75rem !important; }   /* 44px */
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #FFFFFF; }
+::-webkit-scrollbar-thumb { background: #E4E4E7; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #A1A1AA; }
+
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-track { display: flex; width: max-content; animation: marquee 35s linear infinite; }
+.animate-marquee-track:hover { animation-play-state: paused; }
+
+.animate-marquee-fast { display: flex; width: max-content; animation: marquee 22s linear infinite; }
+.animate-marquee-fast:hover { animation-play-state: paused; }
+
+.animate-marquee-constant { display: flex; width: max-content; animation: marquee 28s linear infinite; will-change: transform; }
+
+.bg-mesh-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(92, 225, 230, 0.40) 0%, rgba(165, 243, 252, 0.25) 45%, rgba(249, 249, 248, 0) 75%);
+}

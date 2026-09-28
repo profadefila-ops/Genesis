@@ -1,0 +1,6 @@
+{
+  "name": "Consilio — Business & Consulting",
+  "description": "Consilio is a strategy consultancy for leaders navigating change. We pair sharp analysis with hands-on execution, so the right decision actually gets made — and delivered.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
