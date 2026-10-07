@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle2, ArrowUpRight, Sparkles, Clock, Shield, Calendar } from 'lucide-react';
+import { X, CheckCircle2, ArrowUpRight, Sparkles, Shield } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface BookCallModalProps {
@@ -8,6 +8,9 @@ interface BookCallModalProps {
   onClose: () => void;
   preselectedService?: string;
 }
+
+const BOOKING_URL =
+  'https://bookings.cloud.microsoft/bookwithme/user/6c96c7bf461b47c690ae625eec49663a%40genesisoutsourcing.co?anonymous&ismsaljsauthenabled=true';
 
 export const BookCallModal: React.FC<BookCallModalProps> = ({
   isOpen,
@@ -18,7 +21,6 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
   const [selectedType, setSelectedType] = useState(
     preselectedService || 'Talent & HR'
   );
-  const [selectedDate, setSelectedDate] = useState('Tomorrow, 10:00 AM (GMT)');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [company, setCompany] = useState('');
@@ -37,18 +39,9 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
     { title: 'Something else', desc: 'Tell us what you need' },
   ];
 
-  const timeSlots = [
-    'Tomorrow, 10:00 AM (GMT)',
-    'Tomorrow, 02:00 PM (GMT)',
-    'Thursday, 11:30 AM (GMT)',
-    'Thursday, 03:30 PM (GMT)',
-    'Friday, 09:00 AM (GMT)',
-    'Friday, 01:00 PM (GMT)',
-  ];
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStep('success');
+
     try {
       confetti({
         particleCount: 80,
@@ -59,6 +52,11 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
     } catch {
       // safe fallback
     }
+
+    // Open Microsoft Bookings in a new tab
+    window.open(BOOKING_URL, '_blank', 'noopener,noreferrer');
+
+    setStep('success');
   };
 
   const handleReset = () => {
@@ -88,13 +86,9 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
               Gradient Header
              ========================================== */}
           <div className="relative px-6 sm:px-8 py-5 sm:py-6 overflow-hidden">
-            {/* Base gradient background */}
             <div className="absolute inset-0 bg-gradient-to-r from-[#5271ff] via-[#7a4bff] to-[#ff3131]" />
-
-            {/* Deep overlay for depth */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
 
-            {/* Grid texture */}
             <div
               className="absolute inset-0 opacity-[0.08] pointer-events-none"
               style={{
@@ -104,7 +98,6 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
               }}
             />
 
-            {/* Animated ambient glows */}
             <motion.div
               animate={{ x: [0, 30, 0], y: [0, -20, 0], scale: [1, 1.15, 1] }}
               transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }}
@@ -116,17 +109,15 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
               className="absolute -bottom-16 -left-16 w-[240px] h-[240px] bg-[#0C0C0D]/30 blur-[80px] rounded-full pointer-events-none"
             />
 
-            {/* Top and bottom hairline accents */}
             <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
             <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
-            {/* Content */}
             <div className="relative z-10 flex items-start justify-between gap-4">
               <div className="flex items-center gap-4">
                 <img
                   src="https://pub-3e8b7c985b25437fa65904241981be21.r2.dev/TP-version.png"
                   alt="Genesis"
-  className="h-9 w-auto object-contain brightness-0 invert"
+                  className="h-9 w-auto object-contain brightness-0 invert"
                 />
                 <div className="hidden sm:block h-8 w-px bg-white/25" />
                 <div className="hidden sm:block">
@@ -203,49 +194,11 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
                 </div>
               </div>
 
-              {/* Time Slot Selection */}
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="w-5 h-5 rounded-full bg-[#ff3131]/10 text-[#ff3131] text-[10px] font-bold flex items-center justify-center">
-                    2
-                  </span>
-                  <label className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0C0C0D]">
-                    Preferred time
-                  </label>
-                  <span className="ml-auto text-[10px] font-mono text-[#71717A] flex items-center gap-1">
-                    <Clock size={10} /> All times in GMT
-                  </span>
-                </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {timeSlots.map((slot) => {
-                    const isSelected = selectedDate === slot;
-                    return (
-                      <motion.button
-                        key={slot}
-                        type="button"
-                        whileHover={{ y: -2 }}
-                        whileTap={{ scale: 0.97 }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                        onClick={() => setSelectedDate(slot)}
-                        className={`relative px-3 py-2.5 rounded-xl border text-[11px] font-medium transition-all cursor-pointer ${
-                          isSelected
-                            ? 'border-transparent bg-[#0C0C0D] text-white shadow-md'
-                            : 'border-[#EBEBEF] bg-white text-[#4A4A4D] hover:border-[#5271ff]/40 hover:text-[#5271ff]'
-                        }`}
-                      >
-                        <Calendar size={11} className="inline-block mr-1.5 -mt-0.5 opacity-60" />
-                        {slot}
-                      </motion.button>
-                    );
-                  })}
-                </div>
-              </div>
-
               {/* Contact Info */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
                   <span className="w-5 h-5 rounded-full bg-[#5271ff]/10 text-[#5271ff] text-[10px] font-bold flex items-center justify-center">
-                    3
+                    2
                   </span>
                   <label className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0C0C0D]">
                     Your details
@@ -325,7 +278,6 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
                 Success State
                ========================================== */
             <div className="relative p-10 sm:p-14 text-center space-y-6 overflow-hidden">
-              {/* Ambient glows for success state */}
               <motion.div
                 initial={{ scale: 0.6, opacity: 0 }}
                 animate={{ scale: 1.1, opacity: 0.12 }}
@@ -372,13 +324,6 @@ export const BookCallModal: React.FC<BookCallModalProps> = ({
                       Service
                     </span>
                     <span className="font-semibold text-[#0C0C0D] text-right">{selectedType}</span>
-                  </div>
-                  <div className="h-px bg-[#EBEBEF]" />
-                  <div className="flex justify-between items-baseline gap-4 text-[12px]">
-                    <span className="text-[#71717A] uppercase tracking-wider text-[10px] font-semibold">
-                      Time
-                    </span>
-                    <span className="font-semibold text-[#0C0C0D] text-right">{selectedDate}</span>
                   </div>
                   <div className="h-px bg-[#EBEBEF]" />
                   <div className="flex justify-between items-baseline gap-4 text-[12px]">

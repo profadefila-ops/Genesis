@@ -23,7 +23,7 @@ const CLIENT_LOGOS = [
   },
   {
     name: 'Client 03',
-    url: 'https://pub-3e8b7c985b25437fa65904241981be21.r2.dev/1log-removebg-preview.png',
+    url: 'https://pub-3e8b7c985b25437fa65904241981be21.r2.dev/nj9.png',
   },
   {
     name: 'Client 04',
@@ -224,7 +224,7 @@ const LogoCard: React.FC<{ logo: { name: string; url: string } }> = ({ logo }) =
       <img
         src={logo.url}
         alt={logo.name}
-        className="relative max-h-[55%] max-w-[65%] w-auto h-auto object-contain opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+        className="relative max-h-[45%] max-w-[55%] w-auto h-auto object-contain opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
         style={{ filter: 'brightness(0)' }}
       />
     </motion.div>

@@ -39,9 +39,9 @@ const CONTACT_METHODS = [
     icon: Mail,
   },
   {
-    title: 'Visit our office',
-    description: 'Prefer to meet in person? We have teams in the UK and Ghana.',
-    action: 'View locations',
+    title: 'Give us a call',
+    description: 'Let’s talk about your next big idea.',
+    action: '+44 204 630 6663',
     icon: MapPin,
   },
 ];

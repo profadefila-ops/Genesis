@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { ArrowRight, Check, Sparkles } from 'lucide-react';
+import { ArrowRight, Check, Sparkles, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface FooterProps {
   onNavigate: (page: string) => void;
   onBookCall: () => void;
 }
+
+const LINKEDIN_URL =
+  'https://www.linkedin.com/company/genesis-outsourcing/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BMAK4B8emTcub6QPfeMhe7A%3D%3D';
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookCall }) => {
   const [email, setEmail] = useState('');
@@ -91,6 +94,25 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onBookCall }) => {
             <p className="text-[15px] text-white/65 leading-relaxed max-w-sm font-normal">
               We don't believe outsourcing should feel disconnected from your business. Genesis builds teams around your processes, systems, working hours and expectations.
             </p>
+
+            {/* LinkedIn icon button */}
+            {/* LinkedIn icon button */}
+            <div className="pt-1">
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Genesis Outsourcing on LinkedIn"
+                className="group inline-flex items-center gap-2.5 pl-1.5 pr-4 py-1.5 rounded-full bg-white/[0.06] backdrop-blur-md border border-white/15 text-white/70 hover:bg-[#ff3137] hover:border-[#ff3137] hover:text-white transition-all duration-300"
+              >
+                <span className="w-7 h-7 rounded-full bg-white/[0.08] group-hover:bg-white/20 flex items-center justify-center transition-colors duration-300">
+                  <Linkedin size={14} strokeWidth={2} />
+                </span>
+                <span className="text-[12px] font-medium tracking-tight">
+                  Follow us on LinkedIn
+                </span>
+              </a>
+            </div>
 
             {/* Primary CTA */}
             <div className="pt-1">
